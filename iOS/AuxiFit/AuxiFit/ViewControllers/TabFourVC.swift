@@ -29,6 +29,13 @@ class TabFourVC: UIViewController {
         self.view.backgroundColor = UIColor(white: 0.75, alpha: 1)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // Set navigation bar title.
+        self.tabBarController?.navigationItem.title = self.title!
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

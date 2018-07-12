@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         mainTabBarController.tabBar.isTranslucent = false
         let navigationController = UINavigationController(rootViewController: mainTabBarController)
         navigationController.navigationBar.isTranslucent = false
+        //navigationController.navigationBar.topItem?.title = "AuxiFit"
         window?.rootViewController = navigationController
         
         return true
