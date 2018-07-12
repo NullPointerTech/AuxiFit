@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		083664DB20F7D3FE00240C15 /* WorkoutsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083664DA20F7D3FE00240C15 /* WorkoutsTableVC.swift */; };
 		0893241B20F5255E0068789E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0893241A20F5255E0068789E /* AppDelegate.swift */; };
 		0893242220F5255E0068789E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0893242120F5255E0068789E /* Assets.xcassets */; };
 		0893242520F5255E0068789E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0893242320F5255E0068789E /* LaunchScreen.storyboard */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		083664DA20F7D3FE00240C15 /* WorkoutsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WorkoutsTableVC.swift; path = AuxiFit/ViewControllers/WorkoutsTableVC.swift; sourceTree = "<group>"; };
 		0893241720F5255E0068789E /* AuxiFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AuxiFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0893241A20F5255E0068789E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0893242120F5255E0068789E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				0893245020F5307B0068789E /* TabThreeVC.swift */,
 				0893245220F5308F0068789E /* TabFourVC.swift */,
 				0893245420F530A20068789E /* TabFiveVC.swift */,
+				083664DA20F7D3FE00240C15 /* WorkoutsTableVC.swift */,
 			);
 			name = ViewControllers;
 			path = ..;
@@ -286,6 +289,7 @@
 				0893244D20F52FDC0068789E /* TabOneVC.swift in Sources */,
 				0893245520F530A20068789E /* TabFiveVC.swift in Sources */,
 				0893244F20F530650068789E /* TabTwoVC.swift in Sources */,
+				083664DB20F7D3FE00240C15 /* WorkoutsTableVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +526,7 @@
 				0893244120F5255F0068789E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0893244220F5255F0068789E /* Build configuration list for PBXNativeTarget "AuxiFitTests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +535,7 @@
 				0893244420F5255F0068789E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0893244520F5255F0068789E /* Build configuration list for PBXNativeTarget "AuxiFitUITests" */ = {
 			isa = XCConfigurationList;
@@ -538,6 +544,7 @@
 				0893244720F5255F0068789E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

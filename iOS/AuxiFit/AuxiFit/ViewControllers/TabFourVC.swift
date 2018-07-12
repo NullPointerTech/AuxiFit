@@ -41,15 +41,6 @@ class TabFourVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func getTabTitle() -> String {
-        // Return the title for this tab.
-        var tabTitle = ""
-        if self.title != nil {
-            tabTitle = self.title!
-        }
-        return tabTitle
-    }
-    
     /*
     // MARK: - Navigation
 

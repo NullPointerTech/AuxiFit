@@ -22,38 +22,42 @@ class MainTabBarVC: UITabBarController, UITabBarControllerDelegate {
         
         // Create Tab One
         let tabOne = TabOneVC()
-        let tabOneBarItem = UITabBarItem(title: tabOne.getTabTitle(), image: nil, selectedImage: nil)
+        let tabOneBarItem = UITabBarItem(title: tabOne.title, image: nil, selectedImage: nil)
         tabOne.tabBarItem = tabOneBarItem
         
         // Create Tab Two
         let tabTwo = TabTwoVC()
-        let tabTwoBarItem = UITabBarItem(title: tabTwo.getTabTitle(), image: nil, selectedImage: nil)
+        let tabTwoBarItem = UITabBarItem(title: tabTwo.title, image: nil, selectedImage: nil)
         tabTwo.tabBarItem = tabTwoBarItem
         
         // Create Tab Three
         let tabThree = TabThreeVC()
-        let tabThreeBarItem = UITabBarItem(title: tabThree.getTabTitle(), image: nil, selectedImage: nil)
+        let tabThreeBarItem = UITabBarItem(title: tabThree.title, image: nil, selectedImage: nil)
         tabThree.tabBarItem = tabThreeBarItem
         
         // Create Tab Four
         let tabFour = TabFourVC()
-        let tabFourBarItem = UITabBarItem(title: tabFour.getTabTitle(), image: nil, selectedImage: nil)
+        let tabFourBarItem = UITabBarItem(title: tabFour.title, image: nil, selectedImage: nil)
         tabFour.tabBarItem = tabFourBarItem
         
         // Create Tab Five
         let tabFive = TabFiveVC()
-        let tabFiveBarItem = UITabBarItem(title: tabFive.getTabTitle(), image: nil, selectedImage: nil)
+        let tabFiveBarItem = UITabBarItem(title: tabFive.title, image: nil, selectedImage: nil)
         tabFive.tabBarItem = tabFiveBarItem
-        
+
+        // Set all relevant tabs in one list.
         self.viewControllers = [tabOne, tabTwo, tabThree, tabFour, tabFive]
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+    }
 
     /*
     // MARK: - Navigation

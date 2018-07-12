@@ -9,12 +9,17 @@
 import UIKit
 
 class TabOneVC: UIViewController {
-    
+
+    var navBarLargeTitle = false
+
     init() {
         super.init(nibName: nil, bundle: nil)
         
         //Setup tab title here so that over VC's can fetch.
         self.title = "Workouts"
+
+        //Setup navigation bar title size type.
+        self.navBarLargeTitle = false
     }
     
     // This is required by compiler.
@@ -34,20 +39,19 @@ class TabOneVC: UIViewController {
 
         // Set navigation bar title.
         self.tabBarController?.navigationItem.title = self.title!
+
+        // Placeholder in case we want to use large titles in our UI.
+        if (self.navBarLargeTitle == true) {
+            if #available(iOS 11, *) {
+                self.tabBarController?.navigationController?.navigationBar.prefersLargeTitles = true
+                self.tabBarController?.navigationController?.navigationItem.largeTitleDisplayMode = .always
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func getTabTitle() -> String {
-        // Return the title for this tab.
-        var tabTitle = ""
-        if self.title != nil {
-            tabTitle = self.title!
-        }
-        return tabTitle
     }
 
     /*
