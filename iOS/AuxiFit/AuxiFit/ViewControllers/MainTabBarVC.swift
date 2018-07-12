@@ -12,7 +12,7 @@ class MainTabBarVC: UITabBarController, UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Setup color for MainTabBarVC.
         view.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
@@ -20,33 +20,33 @@ class MainTabBarVC: UITabBarController, UITabBarControllerDelegate {
         // can respond to UITabBarControllerDelegate methods
         self.delegate = self
         
-        // Create Tab One
-        let tabOne = TabOneVC()
-        let tabOneBarItem = UITabBarItem(title: tabOne.title, image: nil, selectedImage: nil)
-        tabOne.tabBarItem = tabOneBarItem
+        // Create Tab One and its navigation controller.
+        let tabOne = WorkoutsVC(collectionViewLayout: UICollectionViewFlowLayout())
+        let tabOneNC = UINavigationController(rootViewController: tabOne)
+        tabOneNC.title = tabOne.title
         
-        // Create Tab Two
+        // Create Tab Two and its navigation controller.
         let tabTwo = TabTwoVC()
-        let tabTwoBarItem = UITabBarItem(title: tabTwo.title, image: nil, selectedImage: nil)
-        tabTwo.tabBarItem = tabTwoBarItem
+        let tabTwoNC = UINavigationController(rootViewController: tabTwo)
+        tabTwoNC.title = tabTwo.title
         
-        // Create Tab Three
+        // Create Tab Three and its navigation controller.
         let tabThree = TabThreeVC()
-        let tabThreeBarItem = UITabBarItem(title: tabThree.title, image: nil, selectedImage: nil)
-        tabThree.tabBarItem = tabThreeBarItem
+        let tabThreeNC = UINavigationController(rootViewController: tabThree)
+        tabThreeNC.title = tabThree.title
         
-        // Create Tab Four
+        // Create Tab Four and its navigation controller.
         let tabFour = TabFourVC()
-        let tabFourBarItem = UITabBarItem(title: tabFour.title, image: nil, selectedImage: nil)
-        tabFour.tabBarItem = tabFourBarItem
+        let tabFourNC = UINavigationController(rootViewController: tabFour)
+        tabFourNC.title = tabFour.title
         
-        // Create Tab Five
+        // Create Tab Five and its navigation controller.
         let tabFive = TabFiveVC()
-        let tabFiveBarItem = UITabBarItem(title: tabFive.title, image: nil, selectedImage: nil)
-        tabFive.tabBarItem = tabFiveBarItem
+        let tabFiveNC = UINavigationController(rootViewController: tabFive)
+        tabFiveNC.title = tabFive.title
 
         // Set all relevant tabs in one list.
-        self.viewControllers = [tabOne, tabTwo, tabThree, tabFour, tabFive]
+        self.viewControllers = [tabOneNC, tabTwoNC, tabThreeNC, tabFourNC, tabFiveNC]
     }
 
     override func didReceiveMemoryWarning() {

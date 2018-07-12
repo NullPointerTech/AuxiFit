@@ -24,10 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Setup initial view controller -> Main Tab Bar VC embedded in Navigation controller.
         let mainTabBarController = MainTabBarVC()
         mainTabBarController.tabBar.isTranslucent = false
-        let navigationController = UINavigationController(rootViewController: mainTabBarController)
-        navigationController.navigationBar.isTranslucent = false
-        //navigationController.navigationBar.topItem?.title = "AuxiFit"
-        window?.rootViewController = navigationController
+        window?.rootViewController = mainTabBarController
         
         return true
     }

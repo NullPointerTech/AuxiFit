@@ -33,7 +33,7 @@ class TabFourVC: UIViewController {
         super.viewWillAppear(animated)
 
         // Set navigation bar title.
-        self.tabBarController?.navigationItem.title = self.title!
+        navigationItem.title = self.title!
     }
 
     override func didReceiveMemoryWarning() {
