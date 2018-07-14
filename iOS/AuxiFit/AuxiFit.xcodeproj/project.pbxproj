@@ -18,6 +18,7 @@
 		0893245120F5307B0068789E /* TabThreeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0893245020F5307B0068789E /* TabThreeVC.swift */; };
 		0893245320F5308F0068789E /* TabFourVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0893245220F5308F0068789E /* TabFourVC.swift */; };
 		0893245520F530A20068789E /* TabFiveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0893245420F530A20068789E /* TabFiveVC.swift */; };
+		08D0814020FA8BFC00B43A8F /* WorkoutsVCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D0813F20FA8BFC00B43A8F /* WorkoutsVCHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		0893245020F5307B0068789E /* TabThreeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabThreeVC.swift; path = AuxiFit/ViewControllers/TabThreeVC.swift; sourceTree = "<group>"; };
 		0893245220F5308F0068789E /* TabFourVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabFourVC.swift; path = AuxiFit/ViewControllers/TabFourVC.swift; sourceTree = "<group>"; };
 		0893245420F530A20068789E /* TabFiveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabFiveVC.swift; path = AuxiFit/ViewControllers/TabFiveVC.swift; sourceTree = "<group>"; };
+		08D0813F20FA8BFC00B43A8F /* WorkoutsVCHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsVCHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				0893242620F5255E0068789E /* Info.plist */,
 				0893242320F5255E0068789E /* LaunchScreen.storyboard */,
 				0893244A20F52C9E0068789E /* ViewControllers */,
+				08D0813F20FA8BFC00B43A8F /* WorkoutsVCHelper.swift */,
 			);
 			path = AuxiFit;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08D0814020FA8BFC00B43A8F /* WorkoutsVCHelper.swift in Sources */,
 				0893245320F5308F0068789E /* TabFourVC.swift in Sources */,
 				0893244920F52C970068789E /* MainTabBarVC.swift in Sources */,
 				0893241B20F5255E0068789E /* AppDelegate.swift in Sources */,
