@@ -64,11 +64,22 @@ class WorkoutsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 50)
+        // Specify cell size.
+        return CGSize(width: view.frame.width, height: 75)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        // Spacing between different sections.
+        return UIEdgeInsetsMake(30, 0, 0, 0)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        //Minimum spacing between cell rows.
+        return 10.0
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 2
     }
 
 
@@ -80,6 +91,8 @@ class WorkoutsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         return cell
     }
+
+
 
     // MARK: UICollectionViewDelegate
 
@@ -115,11 +128,28 @@ class WorkoutsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout
 }
 
 class WorkoutsCell: UICollectionViewCell {
-    let nameLabel: UILabel = {
+    // Create workout info label.
+    let workoutInfoLabel: UILabel = {
         let label = UILabel()
-        label.text = "Sample Text"
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 3
+        // Add workout name. Since this is first item, we use mutable.
+        // FIXME: Need to fetch this info from database.
+        let workoutName = NSMutableAttributedString(string: "Workout 1", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18)])
+        let attributedText = workoutName
+        // Add last completed date.
+        // FIXME: Need to fetch this info from database.
+        let workoutLastComp = NSAttributedString(string: "\nLast Completed: 14-07-2018, 18:24:31", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.gray])
+        attributedText.append(workoutLastComp)
+        // Add next workout details.
+        // FIXME: Need to fetch this info from database.
+        let workoutNextDet = NSAttributedString(string: "\nNext Workout: Shoulders", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.gray])
+        attributedText.append(workoutNextDet)
+        // Set line spacing.
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 4
+        attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedText.string.count))
+
+        label.attributedText = attributedText
         return label
     }()
 
@@ -138,9 +168,23 @@ class WorkoutsCell: UICollectionViewCell {
         backgroundColor = UIColor.white
 
         // Add to subview hierarchy.
-        addSubview(nameLabel)
-        // Put on screen using constraints.
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel]))
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel]))
+        addSubview(workoutInfoLabel)
+
+        // Put on screen using constraints. 8 pixels from left.
+        addConstraintsWithFormat(format: "H:|-8-[v0]|", views: workoutInfoLabel)
+        addConstraintsWithFormat(format: "V:|[v0]|", views: workoutInfoLabel)
+    }
+}
+
+// Extension to easily setup constraints for workout cells.
+extension UIView {
+    func addConstraintsWithFormat(format: String, views: UIView...) {
+        var viewsDict = [String: UIView]()
+        for (index, view) in views.enumerated() {
+            let key = "v\(index)"
+            viewsDict[key] = view
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDict))
     }
 }
