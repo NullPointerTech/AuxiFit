@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 private let reuseIdentifier = "workoutCell"
 
@@ -36,19 +37,8 @@ class WorkoutsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Create workout cell items. FIXME: Fetch this from Core Data.
-        var workoutOne = WorkoutCellItem()
-        workoutOne.name = "Workout Routine 1"
-        workoutOne.lastCompleted = "14-07-2018, 18:24:31"
-        workoutOne.nextWorkout = "Shoulders"
-
-        var workoutTwo = WorkoutCellItem()
-        workoutTwo.name = "Workout Routine 2"
-        workoutTwo.lastCompleted = "15-07-2018, 17:34:55"
-        workoutTwo.nextWorkout = "Legs"
-
-        workoutsList.append(workoutOne)
-        workoutsList.append(workoutTwo)
+        // Setup workouts data.
+        setupData()
 
         // Register cell classes
         self.collectionView!.register(WorkoutCell.self, forCellWithReuseIdentifier: reuseIdentifier)
