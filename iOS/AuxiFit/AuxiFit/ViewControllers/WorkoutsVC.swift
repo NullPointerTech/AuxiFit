@@ -17,7 +17,7 @@ class WorkoutsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout
 
     override init(collectionViewLayout layout: UICollectionViewLayout) {
         super.init(collectionViewLayout: layout)
-        //Setup tab title here so that over VC's can fetch.
+        //Setup tab title here so that other VC's can fetch.
         self.title = "Workouts"
     }
 
@@ -49,6 +49,13 @@ class WorkoutsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout
 
         // Set navigation bar title.
         navigationItem.title = self.title!
+
+        // Set navigation bar right button.
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(sequeToCreateWorkout))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+
+        // To highlight selected cell.
+        self.collectionView?.delaysContentTouches = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -91,21 +98,23 @@ class WorkoutsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout
         return workoutCell
     }
 
-    // MARK: UICollectionViewDelegate
+    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+    return true
+    }
 
-    /*
-     // Uncomment this method to specify if the specified item should be highlighted during tracking
-     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+    return true
+    }
 
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
+    override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.backgroundColor = UIColor.lightGray
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.backgroundColor = UIColor.white
+    }
 
     /*
      // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item

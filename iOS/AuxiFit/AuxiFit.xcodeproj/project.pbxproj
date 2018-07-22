@@ -18,7 +18,10 @@
 		0893245120F5307B0068789E /* TabThreeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0893245020F5307B0068789E /* TabThreeVC.swift */; };
 		0893245320F5308F0068789E /* TabFourVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0893245220F5308F0068789E /* TabFourVC.swift */; };
 		0893245520F530A20068789E /* TabFiveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0893245420F530A20068789E /* TabFiveVC.swift */; };
-		08B58A6120FA9ED8000BB4AE /* WorkoutCellItem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08B58A5F20FA9ED8000BB4AE /* WorkoutCellItem.xcdatamodeld */; };
+		08B58A6420FFAB89000BB4AE /* CreateWorkoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B58A6320FFAB89000BB4AE /* CreateWorkoutVC.swift */; };
+		08B58A6620FFB949000BB4AE /* CreateWorkoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B58A6520FFB949000BB4AE /* CreateWorkoutHelper.swift */; };
+		08B58A6820FFBE79000BB4AE /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B58A6720FFBE79000BB4AE /* CommonExtensions.swift */; };
+		08B58A6B2104A465000BB4AE /* WorkoutCellItem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08B58A692104A465000BB4AE /* WorkoutCellItem.xcdatamodeld */; };
 		08D0814020FA8BFC00B43A8F /* WorkoutsVCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D0813F20FA8BFC00B43A8F /* WorkoutsVCHelper.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,7 +60,10 @@
 		0893245020F5307B0068789E /* TabThreeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabThreeVC.swift; path = AuxiFit/ViewControllers/TabThreeVC.swift; sourceTree = "<group>"; };
 		0893245220F5308F0068789E /* TabFourVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabFourVC.swift; path = AuxiFit/ViewControllers/TabFourVC.swift; sourceTree = "<group>"; };
 		0893245420F530A20068789E /* TabFiveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabFiveVC.swift; path = AuxiFit/ViewControllers/TabFiveVC.swift; sourceTree = "<group>"; };
-		08B58A6020FA9ED8000BB4AE /* WorkoutsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WorkoutsModel.xcdatamodel; sourceTree = "<group>"; };
+		08B58A6320FFAB89000BB4AE /* CreateWorkoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateWorkoutVC.swift; path = AuxiFit/ViewControllers/CreateWorkoutVC.swift; sourceTree = "<group>"; };
+		08B58A6520FFB949000BB4AE /* CreateWorkoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkoutHelper.swift; sourceTree = "<group>"; };
+		08B58A6720FFBE79000BB4AE /* CommonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExtensions.swift; sourceTree = "<group>"; };
+		08B58A6A2104A465000BB4AE /* WorkoutsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WorkoutsModel.xcdatamodel; sourceTree = "<group>"; };
 		08D0813F20FA8BFC00B43A8F /* WorkoutsVCHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsVCHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,6 +122,8 @@
 				0893242320F5255E0068789E /* LaunchScreen.storyboard */,
 				0893244A20F52C9E0068789E /* ViewControllers */,
 				08D0813F20FA8BFC00B43A8F /* WorkoutsVCHelper.swift */,
+				08B58A6520FFB949000BB4AE /* CreateWorkoutHelper.swift */,
+				08B58A6720FFBE79000BB4AE /* CommonExtensions.swift */,
 			);
 			path = AuxiFit;
 			sourceTree = "<group>";
@@ -147,6 +155,7 @@
 				0893245020F5307B0068789E /* TabThreeVC.swift */,
 				0893245220F5308F0068789E /* TabFourVC.swift */,
 				0893245420F530A20068789E /* TabFiveVC.swift */,
+				08B58A6320FFAB89000BB4AE /* CreateWorkoutVC.swift */,
 			);
 			name = ViewControllers;
 			path = ..;
@@ -155,7 +164,7 @@
 		08B58A6220FA9EE2000BB4AE /* CoreDataModels */ = {
 			isa = PBXGroup;
 			children = (
-				08B58A5F20FA9ED8000BB4AE /* WorkoutCellItem.xcdatamodeld */,
+				08B58A692104A465000BB4AE /* WorkoutCellItem.xcdatamodeld */,
 			);
 			name = CoreDataModels;
 			path = "New Group";
@@ -296,12 +305,15 @@
 			files = (
 				08D0814020FA8BFC00B43A8F /* WorkoutsVCHelper.swift in Sources */,
 				0893245320F5308F0068789E /* TabFourVC.swift in Sources */,
+				08B58A6420FFAB89000BB4AE /* CreateWorkoutVC.swift in Sources */,
 				0893244920F52C970068789E /* MainTabBarVC.swift in Sources */,
 				0893241B20F5255E0068789E /* AppDelegate.swift in Sources */,
+				08B58A6620FFB949000BB4AE /* CreateWorkoutHelper.swift in Sources */,
 				0893245120F5307B0068789E /* TabThreeVC.swift in Sources */,
-				08B58A6120FA9ED8000BB4AE /* WorkoutCellItem.xcdatamodeld in Sources */,
 				0893244D20F52FDC0068789E /* WorkoutsVC.swift in Sources */,
 				0893245520F530A20068789E /* TabFiveVC.swift in Sources */,
+				08B58A6820FFBE79000BB4AE /* CommonExtensions.swift in Sources */,
+				08B58A6B2104A465000BB4AE /* WorkoutCellItem.xcdatamodeld in Sources */,
 				0893244F20F530650068789E /* TabTwoVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -562,13 +574,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		08B58A5F20FA9ED8000BB4AE /* WorkoutCellItem.xcdatamodeld */ = {
+		08B58A692104A465000BB4AE /* WorkoutCellItem.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				08B58A6020FA9ED8000BB4AE /* WorkoutsModel.xcdatamodel */,
+				08B58A6A2104A465000BB4AE /* WorkoutsModel.xcdatamodel */,
 			);
-			currentVersion = 08B58A6020FA9ED8000BB4AE /* WorkoutsModel.xcdatamodel */;
-			path = WorkoutCellItem.xcdatamodeld;
+			currentVersion = 08B58A6A2104A465000BB4AE /* WorkoutsModel.xcdatamodel */;
+			name = WorkoutCellItem.xcdatamodeld;
+			path = ../CoreDataModels/WorkoutCellItem.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

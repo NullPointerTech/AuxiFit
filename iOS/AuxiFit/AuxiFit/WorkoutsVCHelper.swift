@@ -13,14 +13,6 @@ class WorkoutCellItem: NSManagedObject {
     @NSManaged var name: String
     @NSManaged var lastCompleted: String
     @NSManaged var nextWorkout: String
-
-//    init(name: String = "My Workout",
-//        lastCompleted: String = "Never",
-//        nextWorkout: String = "None") {
-//        self.name = name
-//        self.lastCompleted = lastCompleted
-//        self.nextWorkout = nextWorkout
-//    }
 }
 
 class WorkoutCell: UICollectionViewCell {
@@ -74,19 +66,6 @@ class WorkoutCell: UICollectionViewCell {
         // Put on screen using constraints. 8 pixels from left.
         addConstraintsWithFormat(format: "H:|-8-[v0]|", views: workoutInfoLabel)
         addConstraintsWithFormat(format: "V:|[v0]|", views: workoutInfoLabel)
-    }
-}
-
-// Extension to easily setup constraints for workout cells.
-extension UIView {
-    func addConstraintsWithFormat(format: String, views: UIView...) {
-        var viewsDict = [String: UIView]()
-        for (index, view) in views.enumerated() {
-            let key = "v\(index)"
-            viewsDict[key] = view
-            view.translatesAutoresizingMaskIntoConstraints = false
-        }
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDict))
     }
 }
 
@@ -149,5 +128,11 @@ extension WorkoutsVC {
                 print(err)
             }
         }
+    }
+
+    func sequeToCreateWorkout() {
+        print ("Clicked CreateWorkout button")
+        let createWorkoutVC = CreateWorkoutVC(collectionViewLayout: UICollectionViewFlowLayout())
+        navigationController?.pushViewController(createWorkoutVC, animated: true)
     }
 }
