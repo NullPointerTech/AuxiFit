@@ -3,13 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "GLOBAL">
+         contextName = "CreateWorkoutCell.workoutControlButtonPressed(sender:):CreateWorkoutHelper.swift">
          <PersistentStrings>
             <PersistentString
-               value = "createWorkoutHeader">
-            </PersistentString>
-            <PersistentString
-               value = "createWorkoutHeader?.workoutSegmentViewObj">
+               value = "self.window?.rootViewController?.presentedViewController">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

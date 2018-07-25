@@ -14,6 +14,7 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
 
     private let workoutNameHeader = "workoutNameHeader"
     weak var createWorkoutHeader: CreateWorkoutCell?
+    var createWorkoutCellList = [CreateWorkoutCellItem]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +43,8 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // Specify cell size.
-        return CGSize(width: view.frame.width, height: 40)
+        let cellHeight = CreateWorkoutCell.createWorkoutCellInfoLabelHeight
+        return CGSize(width: view.frame.width, height: cellHeight)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -61,7 +63,7 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         // Spacing between different sections.
         if (section == 0) {
-            return UIEdgeInsetsMake(0, 0, 0, 0)
+            return UIEdgeInsetsMake(0, 0, 14, 0)
         }
         else {
             return UIEdgeInsetsMake(25, 0, 0, 0)
@@ -70,7 +72,7 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         //Minimum spacing between cell rows.
-        return 10.0
+        return 0
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -78,11 +80,13 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return createWorkoutCellList.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let createWorkoutCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CreateWorkoutCell
+        // Setup workout cell attributes.
+        createWorkoutCell.createWorkoutCellItem = createWorkoutCellList[indexPath.item]
         createWorkoutCell.setupCell(cellType: "Cell")
         return createWorkoutCell
     }

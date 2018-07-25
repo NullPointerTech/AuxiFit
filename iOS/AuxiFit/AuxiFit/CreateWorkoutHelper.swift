@@ -8,6 +8,19 @@
 
 import UIKit
 
+class CreateWorkoutCellItem {
+    var title: String
+    var type: String
+    var details: String
+
+    init(title: String, type: String, details: String)
+    {
+        self.title = title
+        self.type = type
+        self.details = details
+    }
+}
+
 class CreateWorkoutCell: UICollectionViewCell {
 
     // workoutName text field dimensions.
@@ -21,6 +34,31 @@ class CreateWorkoutCell: UICollectionViewCell {
     let headerSubViewCount = CGFloat(3.0)
     // pixel spacing between each subview.
     let headerPixelSpace = CGFloat(14.0)
+    // createWorkoutCellInfoLabel dimensions.
+    static var createWorkoutCellInfoLabelHeight = CGFloat(65.0)
+
+    // Setup cell parameters.
+    var createWorkoutCellItem: CreateWorkoutCellItem? {
+        didSet {
+            // Add cell title.Since this is first item, we use mutable.
+            let cellTitle = NSMutableAttributedString(string: (createWorkoutCellItem?.title)! + "\n", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16)])
+            let attributedText = cellTitle
+            // Add cell type.
+            let cellType = (createWorkoutCellItem?.type)! + "\n"
+            attributedText.append(NSAttributedString(string: cellType, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.gray]))
+            // Add cell details.
+            let cellDetails = (createWorkoutCellItem?.details)!
+            attributedText.append(NSAttributedString(string: cellDetails, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.gray]))
+            // Set line spacing.
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 2
+            paragraphStyle.firstLineHeadIndent = 8
+            paragraphStyle.headIndent = 8
+            attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedText.string.count))
+            //Finally, update workoutInfoLabel and return.
+            createWorkoutCellInfoLabel.attributedText = attributedText
+        }
+    }
 
     // Create workout name text field.
     var workoutName: UITextField {
@@ -86,17 +124,14 @@ class CreateWorkoutCell: UICollectionViewCell {
     }
 
     // Create workout info label.
-    let workoutCellItem: UILabel = {
+    let createWorkoutCellInfoLabel: UILabel = {
         let cellWidth = UIScreen.main.bounds.width
         let label = UILabel()
-        let labelText = "Sample Cell"
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.firstLineHeadIndent = 8
-        label.attributedText = NSMutableAttributedString(string: labelText, attributes: [NSParagraphStyleAttributeName: paragraphStyle])
+        label.numberOfLines = 3
         label.textColor = UIColor.black
         label.backgroundColor = UIColor.white
-        label.frame = CGRect(x: 0, y: 0, width: cellWidth, height: 40)
-        label.layer.cornerRadius = 4
+        label.frame = CGRect(x: 0, y: 0, width: cellWidth, height: createWorkoutCellInfoLabelHeight)
+        // label.layer.cornerRadius = 4
         return label
     }()
 
@@ -149,22 +184,22 @@ class CreateWorkoutCell: UICollectionViewCell {
 
     private func setupCellView() {
         // Add to subview hierarchy.
-        addSubview(workoutCellItem)
+        addSubview(createWorkoutCellInfoLabel)
 
         // For immediate detection if subviews are out of bounds.
-        workoutCellItem.superview?.clipsToBounds = true
+        createWorkoutCellInfoLabel.superview?.clipsToBounds = true
 
         // For debug to make sure all subviews are within under superview bounds.
-        workoutCellItem.layer.borderWidth = 1
+        createWorkoutCellInfoLabel.layer.borderWidth = 1
 
         // For debug to make sure all subviews are within under superview bounds.
-        // workoutCellItem.superview?.layer.borderWidth = 1
+        // createWorkoutCellInfoLabel.superview?.layer.borderWidth = 1
 
         // Put on screen using constraints.
-        let verticalContraint = "V:|[v0(40)]|"
-        addConstraintsWithFormat(format: verticalContraint, views: workoutCellItem)
+        let verticalContraint = "V:|[v0(\(CreateWorkoutCell.createWorkoutCellInfoLabelHeight))]|"
+        addConstraintsWithFormat(format: verticalContraint, views: createWorkoutCellInfoLabel)
         let horizontalConstraint = "H:|-14-[v0]-14-|"
-        addConstraintsWithFormat(format: horizontalConstraint, views: workoutCellItem)
+        addConstraintsWithFormat(format: horizontalConstraint, views: createWorkoutCellInfoLabel)
     }
 
     func workoutControlButtonPressed(sender: UIButton) {
@@ -173,5 +208,24 @@ class CreateWorkoutCell: UICollectionViewCell {
             buttonTitle = currentTitle
         }
         print("DEBUG: Pressed button: " + buttonTitle)
+
+        switch buttonTitle {
+        case "+Day":
+            // Create a new cell item.
+            let cellTitle = "Workout Day 1"
+            let cellType = "Type: Workout"
+            let cellDetails = "0 Set(s), 4 Exercise(s)"
+            let cellItem = CreateWorkoutCellItem(title: cellTitle, type: cellType, details: cellDetails)
+            let vc = UIApplication.topViewController() as! CreateWorkoutVC
+            vc.createWorkoutCellList.append(cellItem)
+            let indexPath = IndexPath(item: (vc.createWorkoutCellList.count-1), section: 0)
+            vc.collectionView?.performBatchUpdates({
+                vc.collectionView?.insertItems(at: [indexPath])
+                vc.collectionView?.reloadData()
+            }, completion: nil)
+            vc.collectionView?.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+        default:
+            print("ERROR: Invalid input for CreateWorkoutCell.workoutControlButtonPressed() !!")
+        }
     }
 }

@@ -8,8 +8,8 @@
 
 import UIKit
 
-// Extension to easily setup constraints for collection view cells.
 extension UIView {
+    // Extension to easily setup constraints for collection view cells.
     func addConstraintsWithFormat(format: String, views: UIView...) {
         var viewsDict = [String: UIView]()
         for (index, view) in views.enumerated() {
@@ -22,6 +22,7 @@ extension UIView {
 }
 
 extension UIButton {
+    // Extension to round corners for button.
     func roundCorners(_ corners:UIRectCorner, radius: CGFloat) {
         let path = UIBezierPath(roundedRect: self.layer.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()
@@ -33,6 +34,7 @@ extension UIButton {
         self.layer.mask = mask
     }
 
+    // Extension to add right border to button.
     func addRightBorder(borderColor: UIColor, borderWidth: CGFloat) {
         let border = CALayer()
         border.backgroundColor = borderColor.cgColor
@@ -40,10 +42,38 @@ extension UIButton {
         self.layer.addSublayer(border)
     }
 
+    // Extension to add left border to button.
     func addLeftBorder(borderColor: UIColor, borderWidth: CGFloat) {
         let border = CALayer()
         border.backgroundColor = borderColor.cgColor
         border.frame = CGRect(x:0, y:0, width:borderWidth, height:self.frame.size.height)
         self.layer.addSublayer(border)
+    }
+}
+
+extension UIApplication{
+    // Extension to get present view controller.
+    class func topViewController(_ base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController
+        {
+            let top = topViewController(nav.visibleViewController)
+            return top
+        }
+
+        if let tab = base as? UITabBarController
+        {
+            if let selected = tab.selectedViewController
+            {
+                let top = topViewController(selected)
+                return top
+            }
+        }
+
+        if let presented = base?.presentedViewController
+        {
+            let top = topViewController(presented)
+            return top
+        }
+        return base
     }
 }
