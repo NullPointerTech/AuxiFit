@@ -20,3 +20,30 @@ extension UIView {
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDict))
     }
 }
+
+extension UIButton {
+    func roundCorners(_ corners:UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.layer.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.frame = self.layer.frame
+        mask.strokeColor = self.backgroundColor?.cgColor
+        mask.fillColor = self.backgroundColor?.cgColor
+        mask.lineWidth = 1.0
+        mask.path = path.cgPath
+        self.layer.mask = mask
+    }
+
+    func addRightBorder(borderColor: UIColor, borderWidth: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = borderColor.cgColor
+        border.frame = CGRect(x: self.frame.size.width - borderWidth,y: 0, width:borderWidth, height:self.frame.size.height)
+        self.layer.addSublayer(border)
+    }
+
+    func addLeftBorder(borderColor: UIColor, borderWidth: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = borderColor.cgColor
+        border.frame = CGRect(x:0, y:0, width:borderWidth, height:self.frame.size.height)
+        self.layer.addSublayer(border)
+    }
+}

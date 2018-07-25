@@ -42,7 +42,7 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // Specify cell size.
-        return CGSize(width: view.frame.width, height: 75)
+        return CGSize(width: view.frame.width, height: 40)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -50,7 +50,7 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
         if (section == 0) {
             // First header has workoutName/workoutDescription text field.
             let tempObject = CreateWorkoutCell()
-            let headerHeight = tempObject.workoutNameFieldHeight + tempObject.workoutDescriptionFieldHeight + tempObject.workoutSegmentFieldHeight + (tempObject.headerPixelSpace * (tempObject.headerSubViewCount + 1))
+            let headerHeight = tempObject.workoutNameFieldHeight + tempObject.workoutDescriptionFieldHeight + tempObject.workoutControlButtonsHeight + (tempObject.headerPixelSpace * (tempObject.headerSubViewCount + 1))
             return CGSize(width: view.frame.width, height: headerHeight)
         }
         else {
@@ -61,7 +61,7 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         // Spacing between different sections.
         if (section == 0) {
-            return UIEdgeInsetsMake(10, 0, 0, 0)
+            return UIEdgeInsetsMake(0, 0, 0, 0)
         }
         else {
             return UIEdgeInsetsMake(25, 0, 0, 0)
@@ -78,7 +78,7 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
