@@ -132,7 +132,8 @@ extension WorkoutsVC {
 
     func sequeToCreateWorkout() {
         print ("DEBUG: Clicked CreateWorkout button.")
-        let createWorkoutVC = CreateWorkoutVC(collectionViewLayout: UICollectionViewFlowLayout())
+        //let createWorkoutVC = CreateWorkoutVC(collectionViewLayout: UICollectionViewFlowLayout())
+        let createWorkoutVC = CreateWorkoutVC(collectionViewLayout: CreateWorkoutStickyHeadersLayout())
         navigationController?.pushViewController(createWorkoutVC, animated: true)
     }
 }

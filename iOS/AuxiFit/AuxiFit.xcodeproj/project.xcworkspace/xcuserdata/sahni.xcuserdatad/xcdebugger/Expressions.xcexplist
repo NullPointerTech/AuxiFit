@@ -3,6 +3,20 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "CreateWorkoutStickyHeadersLayout.boundaries(forSection:):CreateWorkoutHelper.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CreateWorkoutStickyHeadersLayout.layoutAttributesForSupplementaryView(ofKind:at:):CreateWorkoutHelper.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "UIApplication.shared.statusBarFrame.size.height">
+            </PersistentString>
+            <PersistentString
+               value = "vc?.navigationController?.navigationBar.frame.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "CreateWorkoutCell.workoutControlButtonPressed(sender:):CreateWorkoutHelper.swift">
          <PersistentStrings>
             <PersistentString

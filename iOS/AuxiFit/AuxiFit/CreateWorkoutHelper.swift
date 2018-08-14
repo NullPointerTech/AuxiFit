@@ -229,3 +229,85 @@ class CreateWorkoutCell: UICollectionViewCell {
         }
     }
 }
+
+class CreateWorkoutStickyHeadersLayout: UICollectionViewFlowLayout {
+
+    //Whenever the bounds of the collection view change,
+    //we need to invalidate the layout of the collection view.
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        return true
+    }
+
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        //Get the layout attributes of the elements in the given rectangle.
+        guard let layoutAttributes = super.layoutAttributesForElements(in: rect) else { return nil }
+
+        //Sections for which new layout attributes are stored.
+        let sectionsToAdd = NSMutableIndexSet()
+        //To store the new layout attributes of the elements.
+        var newLayoutAttributes = [UICollectionViewLayoutAttributes]()
+
+        //Loop over layoutAttributes and add the layout attributes of the
+        //elements of type .cell to newLayoutAttributes.
+        //For every element of type .cell, we ask it what section it belongs to.
+        //We add the index of the section to sectionsToAdd.
+        //For elements of type .supplementaryView, we ask it for its section
+        //and add that to sectionsToAdd.
+        for layoutAttributesSet in layoutAttributes {
+            if layoutAttributesSet.representedElementCategory == .cell {
+                // Add Layout Attributes
+                newLayoutAttributes.append(layoutAttributesSet)
+                // Update Sections to Add
+                sectionsToAdd.add(layoutAttributesSet.indexPath.section)
+
+            } else if layoutAttributesSet.representedElementCategory == .supplementaryView {
+                // Update Sections to Add
+                sectionsToAdd.add(layoutAttributesSet.indexPath.section)
+            }
+        }
+
+        //For every index of sectionsToAdd, we create an index path
+        //and ask the flow layout for the layout attributes of the
+        //corresponding supplementary view.
+        for section in sectionsToAdd {
+            let indexPath = IndexPath(item: 0, section: section)
+            if let sectionAttributes = self.layoutAttributesForSupplementaryView(ofKind: UICollectionElementKindSectionHeader, at: indexPath) {
+                newLayoutAttributes.append(sectionAttributes)
+            }
+        }
+
+        return newLayoutAttributes
+    }
+
+    override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        guard let layoutAttributes = super.layoutAttributesForSupplementaryView(ofKind: elementKind, at: indexPath) else { return nil }
+        guard let collectionView = collectionView else { return layoutAttributes }
+
+        //Stores the vertical content offset of the collection view.
+        let contentOffsetY = collectionView.contentOffset.y
+        //Stores the frame of the supplementary view.
+        var frameForSupplementaryView = layoutAttributes.frame
+
+        let topBarHeight = UIApplication.shared.statusBarFrame.size.height +
+            ((UIApplication.topViewController())?.navigationController?.navigationBar.frame.height ?? 0.0)
+
+        //Find amount of header to hide. All except control buttons.
+        //Also adjust for navigation and status bar.
+        let tempObject = CreateWorkoutCell()    //FIXME: Use static.
+        let hideHeaderHeight = tempObject.workoutNameFieldHeight + tempObject.workoutDescriptionFieldHeight + (tempObject.headerPixelSpace * 2)
+
+        //Calculate when contentOffsetY will cross header height (which will be hidden).
+        let contentOffsetYLimit = hideHeaderHeight - topBarHeight
+
+        //Set position of header based on contentOffsetY.
+        if contentOffsetY > contentOffsetYLimit {
+            frameForSupplementaryView.origin.y = contentOffsetY + topBarHeight - hideHeaderHeight
+        }
+        else {
+            frameForSupplementaryView.origin.y = 0
+        }
+
+        layoutAttributes.frame = frameForSupplementaryView
+        return layoutAttributes
+    }
+}
