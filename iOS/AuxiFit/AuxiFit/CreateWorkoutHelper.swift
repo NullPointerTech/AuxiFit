@@ -29,7 +29,7 @@ class CreateWorkoutCell: UICollectionViewCell {
     static let workoutDescriptionFieldHeight = CGFloat(115.0)
     // addDay, addSet, addExercise button dimensions. NOTE: 28 = 2*headerPixelSpace
     static let workoutControlButtonsHeight = CGFloat(30.0)
-    static let workoutControlButtonsWidth = CGFloat((UIScreen.main.bounds.width - 28)/3)
+    static let workoutControlButtonsWidth = CGFloat((UIScreen.main.bounds.width - (CreateWorkoutCell.headerPixelSpace * 2))/3)
     // total number of subviews in header.
     static let headerSubViewCount = CGFloat(3.0)
     // pixel spacing between each subview.
@@ -123,6 +123,18 @@ class CreateWorkoutCell: UICollectionViewCell {
         }
     }
 
+    var workoutControlButtonsBG: UIView {
+        get {
+            let bgRectWidth = UIScreen.main.bounds.width
+            let bgRectHeight = CreateWorkoutCell.workoutControlButtonsHeight + (CreateWorkoutCell.headerPixelSpace * 2)
+            let bgRect = CGRect(x: 0, y: 0, width: bgRectWidth, height: bgRectHeight)
+            let rectView = UIView(frame: bgRect)
+            let vc = (UIApplication.topViewController()) as! CreateWorkoutVC
+            rectView.backgroundColor = vc.collectionView?.backgroundColor
+            return rectView
+        }
+    }
+
     // Create workout info label.
     let createWorkoutCellInfoLabel: UILabel = {
         let cellWidth = UIScreen.main.bounds.width
@@ -153,6 +165,8 @@ class CreateWorkoutCell: UICollectionViewCell {
         addSubview(workoutNameView)
         let workoutDescriptionView = workoutDescription
         addSubview(workoutDescriptionView)
+        let workoutControlButtonsBGView = workoutControlButtonsBG
+        addSubview(workoutControlButtonsBGView)
         let addDayButton = addDay
         addDayButton.addTarget(self, action: #selector(CreateWorkoutCell.workoutControlButtonPressed), for: .touchUpInside)
         addSubview(addDayButton)
@@ -182,9 +196,13 @@ class CreateWorkoutCell: UICollectionViewCell {
         verticalContraint = "V:|-\((headerPixelSpace*3)+workoutNameFieldHeight+workoutDescriptionFieldHeight)-[v0(\(workoutControlButtonsHeight))]"
         addConstraintsWithFormat(format: verticalContraint, views: addSetButton)
         addConstraintsWithFormat(format: verticalContraint, views: addExerciseButton)
+        verticalContraint = "V:|-\((headerPixelSpace*2)+workoutNameFieldHeight+workoutDescriptionFieldHeight)-[v0]|"
+        addConstraintsWithFormat(format: verticalContraint, views: workoutControlButtonsBGView)
         var horizontalConstraint = "H:|-\(headerPixelSpace)-[v0]-\(headerPixelSpace)-|"
         addConstraintsWithFormat(format: horizontalConstraint, views: workoutNameView)
         addConstraintsWithFormat(format: horizontalConstraint, views: workoutDescriptionView)
+        horizontalConstraint = "H:|[v0]|"
+        addConstraintsWithFormat(format: horizontalConstraint, views: workoutControlButtonsBGView)
         horizontalConstraint = "H:|-\(headerPixelSpace)-[v0(\(workoutControlButtonsWidth))]-0-[v1(\(workoutControlButtonsWidth))]-0-[v2(\(workoutControlButtonsWidth))]-\(headerPixelSpace)-|"
         addConstraintsWithFormat(format: horizontalConstraint, views: addDayButton, addSetButton, addExerciseButton)
     }
@@ -195,8 +213,7 @@ class CreateWorkoutCell: UICollectionViewCell {
 
         // For immediate detection if subviews are out of bounds.
         createWorkoutCellInfoLabel.superview?.clipsToBounds = true
-
-        // For debug to make sure all subviews are within under superview bounds.
+        // Cell border.
         createWorkoutCellInfoLabel.layer.borderWidth = 1
 
         // For debug to make sure all subviews are within under superview bounds.

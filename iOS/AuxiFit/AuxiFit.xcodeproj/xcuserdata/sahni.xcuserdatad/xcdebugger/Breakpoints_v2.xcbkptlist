@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxiFit/CreateWorkoutHelper.swift"
-            timestampString = "556024230.48476"
+            timestampString = "556030081.461254"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
             landmarkName = "setupHeaderView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -59,11 +59,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxiFit/CreateWorkoutHelper.swift"
-            timestampString = "556024230.4860851"
+            timestampString = "556030081.462253"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
             landmarkName = "workoutControlButtonPressed(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -75,11 +75,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxiFit/CreateWorkoutHelper.swift"
-            timestampString = "556024230.486918"
+            timestampString = "556030081.462845"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
+            startingLineNumber = "312"
+            endingLineNumber = "312"
             landmarkName = "layoutAttributesForSupplementaryView(ofKind:at:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -91,11 +91,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxiFit/CreateWorkoutHelper.swift"
-            timestampString = "556024230.487741"
+            timestampString = "556030081.463382"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
             landmarkName = "layoutAttributesForSupplementaryView(ofKind:at:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -107,11 +107,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxiFit/CreateWorkoutHelper.swift"
-            timestampString = "556024230.48867"
+            timestampString = "556030081.46386"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "315"
-            endingLineNumber = "315"
+            startingLineNumber = "332"
+            endingLineNumber = "332"
             landmarkName = "layoutAttributesForSupplementaryView(ofKind:at:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -119,15 +119,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxiFit/CreateWorkoutHelper.swift"
-            timestampString = "556024230.48914"
+            timestampString = "556030081.4643281"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
+            startingLineNumber = "320"
+            endingLineNumber = "320"
             landmarkName = "layoutAttributesForSupplementaryView(ofKind:at:)"
             landmarkType = "7">
          </BreakpointContent>

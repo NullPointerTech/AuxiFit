@@ -24,5 +24,8 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "CreateWorkoutCell.workoutControlButtonsBG.getter:CreateWorkoutHelper.swift">
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

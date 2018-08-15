@@ -62,8 +62,7 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         // Spacing between different sections.
         if (section == 0) {
-            //FIXME: Should have top inset here?
-            return UIEdgeInsetsMake(0, 0, CreateWorkoutCell.headerPixelSpace, 0)
+            return UIEdgeInsetsMake(0, 0, 0, 0)
         }
         else {
             return UIEdgeInsetsMake(25, 0, 0, 0)
@@ -98,6 +97,11 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
     }
 
     // MARK: UICollectionViewDelegate
+
+    override func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        // This is workaround for iOS11 bug where scroll bar hides behind subview.
+        view.layer.zPosition = 0.0
+    }
 
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking
