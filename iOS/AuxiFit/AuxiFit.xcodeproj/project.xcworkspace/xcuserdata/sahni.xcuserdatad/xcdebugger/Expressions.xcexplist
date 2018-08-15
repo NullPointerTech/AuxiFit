@@ -27,5 +27,13 @@
       <ContextState
          contextName = "CreateWorkoutCell.workoutControlButtonsBG.getter:CreateWorkoutHelper.swift">
       </ContextState>
+      <ContextState
+         contextName = "CreateWorkoutVC.collectionView(_:didHighlightItemAt:):CreateWorkoutVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "CreateWorkoutCell.currentSelectedCell">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

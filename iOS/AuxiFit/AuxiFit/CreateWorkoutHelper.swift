@@ -36,11 +36,15 @@ class CreateWorkoutCell: UICollectionViewCell {
     static let headerPixelSpace = CGFloat(14.0)
     // createWorkoutCellInfoLabel dimensions.
     static var createWorkoutCellInfoLabelHeight = CGFloat(65.0)
+    // to track current selected cell
+    static var currentSelectedCell: IndexPath? = nil
+    // to track if given cell is selected or not.
+    var cellSelected = false
 
     // Setup cell parameters.
     var createWorkoutCellItem: CreateWorkoutCellItem? {
         didSet {
-            // Add cell title.Since this is first item, we use mutable.
+            // Add cell title. Since this is first item, we use mutable.
             let cellTitle = NSMutableAttributedString(string: (createWorkoutCellItem?.title)! + "\n", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16)])
             let attributedText = cellTitle
             // Add cell type.

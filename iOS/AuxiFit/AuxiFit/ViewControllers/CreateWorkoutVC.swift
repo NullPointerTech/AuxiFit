@@ -111,19 +111,61 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
         view.layer.zPosition = 0.0
     }
 
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return true
     }
-    */
 
-    /*
-    // Uncomment this method to specify if the specified item should be selected
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return true
     }
-    */
+
+    override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! CreateWorkoutCell
+        var currSelCellEqNewCell = false
+
+        // Deselect current selected cell (if any selected).
+        if CreateWorkoutCell.currentSelectedCell != nil {
+            let currSelectedCell = collectionView.cellForItem(at: CreateWorkoutCell.currentSelectedCell!) as! CreateWorkoutCell
+
+            if currSelectedCell.cellSelected {
+                currSelectedCell.createWorkoutCellInfoLabel.backgroundColor = UIColor.white
+                currSelectedCell.createWorkoutCellInfoLabel.textColor = UIColor.black
+                let labelAttrText = currSelectedCell.createWorkoutCellInfoLabel.attributedText as? NSMutableAttributedString
+                //FIXME: Need to remove hard-coding of 38 here.
+                labelAttrText?.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: NSMakeRange((cell.createWorkoutCellItem?.title.count)!, 38))
+                currSelectedCell.cellSelected = false
+                CreateWorkoutCell.currentSelectedCell = nil
+            }
+
+            // Check if new cell and curr selected cell are same.
+            if currSelectedCell == cell {
+                currSelCellEqNewCell = true
+            }
+        }
+
+        // If currSelectedCell and new selected cell are same, skip.
+        if !currSelCellEqNewCell {
+            if cell.cellSelected {
+                cell.createWorkoutCellInfoLabel.backgroundColor = UIColor.white
+                cell.createWorkoutCellInfoLabel.textColor = UIColor.black
+                let labelAttrText = cell.createWorkoutCellInfoLabel.attributedText as? NSMutableAttributedString
+                //FIXME: Need to remove hard-coding of 38 here.
+                labelAttrText?.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: NSMakeRange((cell.createWorkoutCellItem?.title.count)!, 38))
+                cell.cellSelected = false
+            }
+            else {
+                cell.createWorkoutCellInfoLabel.backgroundColor = UIColor.darkGray
+                cell.createWorkoutCellInfoLabel.textColor = UIColor.white
+                cell.cellSelected = true
+                CreateWorkoutCell.currentSelectedCell = indexPath
+            }
+        }
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        //let cell = collectionView.cellForItem(at: indexPath)
+        //cell?.backgroundColor = UIColor.white
+    }
 
     /*
     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
