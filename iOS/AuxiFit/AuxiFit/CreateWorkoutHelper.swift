@@ -24,16 +24,16 @@ class CreateWorkoutCellItem {
 class CreateWorkoutCell: UICollectionViewCell {
 
     // workoutName text field dimensions.
-    let workoutNameFieldHeight = CGFloat(40.0)
+    static let workoutNameFieldHeight = CGFloat(40.0)
     // workoutDescription text field dimensions.
-    let workoutDescriptionFieldHeight = CGFloat(115.0)
+    static let workoutDescriptionFieldHeight = CGFloat(115.0)
     // addDay, addSet, addExercise button dimensions. NOTE: 28 = 2*headerPixelSpace
-    let workoutControlButtonsHeight = CGFloat(30.0)
-    let workoutControlButtonsWidth = CGFloat((UIScreen.main.bounds.width - 28)/3)
+    static let workoutControlButtonsHeight = CGFloat(30.0)
+    static let workoutControlButtonsWidth = CGFloat((UIScreen.main.bounds.width - 28)/3)
     // total number of subviews in header.
-    let headerSubViewCount = CGFloat(3.0)
+    static let headerSubViewCount = CGFloat(3.0)
     // pixel spacing between each subview.
-    let headerPixelSpace = CGFloat(14.0)
+    static let headerPixelSpace = CGFloat(14.0)
     // createWorkoutCellInfoLabel dimensions.
     static var createWorkoutCellInfoLabelHeight = CGFloat(65.0)
 
@@ -64,7 +64,7 @@ class CreateWorkoutCell: UICollectionViewCell {
     var workoutName: UITextField {
         get {
             let textWidth = UIScreen.main.bounds.width
-            let textField = UITextField(frame: CGRect(x: 0, y: 0, width: textWidth, height:  workoutNameFieldHeight))
+            let textField = UITextField(frame: CGRect(x: 0, y: 0, width: textWidth, height:  CreateWorkoutCell.workoutNameFieldHeight))
             textField.borderStyle = UITextBorderStyle.roundedRect
             textField.placeholder = "Workout Name"
             textField.font = UIFont.systemFont(ofSize: 16)
@@ -77,7 +77,7 @@ class CreateWorkoutCell: UICollectionViewCell {
     var workoutDescription: UITextView {
         get {
             let textWidth = UIScreen.main.bounds.width
-            let textView = UITextView(frame: CGRect(x: 0, y: 0, width: textWidth, height:  workoutDescriptionFieldHeight))
+            let textView = UITextView(frame: CGRect(x: 0, y: 0, width: textWidth, height:  CreateWorkoutCell.workoutDescriptionFieldHeight))
             // FIXME: Make sure this placeholder vanishes in textViewDidBeginEditing.
             textView.text = "Workout Description"
             // FIXME: Make sure this placeholder color matches textField place holder color.
@@ -91,7 +91,7 @@ class CreateWorkoutCell: UICollectionViewCell {
 
     var addDay: UIButton {
         get {
-            let button = UIButton(frame: CGRect(x: 0, y: 0, width: workoutControlButtonsWidth, height: workoutControlButtonsHeight))
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: CreateWorkoutCell.workoutControlButtonsWidth, height: CreateWorkoutCell.workoutControlButtonsHeight))
             button.setTitle("+Day", for: .normal)
             button.backgroundColor = UIColor.darkGray
             button.tintColor = UIColor.white
@@ -103,7 +103,7 @@ class CreateWorkoutCell: UICollectionViewCell {
 
     var addSet: UIButton {
         get {
-            let button = UIButton(frame: CGRect(x: 0, y: 0, width: workoutControlButtonsWidth, height: workoutControlButtonsHeight))
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: CreateWorkoutCell.workoutControlButtonsWidth, height: CreateWorkoutCell.workoutControlButtonsHeight))
             button.setTitle("+Set", for: .normal)
             button.backgroundColor = UIColor.darkGray
             button.tintColor = UIColor.white
@@ -113,7 +113,7 @@ class CreateWorkoutCell: UICollectionViewCell {
 
     var addExercise: UIButton {
         get {
-            let button = UIButton(frame: CGRect(x: 0, y: 0, width: workoutControlButtonsWidth, height: workoutControlButtonsHeight))
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: CreateWorkoutCell.workoutControlButtonsWidth, height: CreateWorkoutCell.workoutControlButtonsHeight))
             button.setTitle("+Exercise", for: .normal)
             button.backgroundColor = UIColor.darkGray
             button.tintColor = UIColor.white
@@ -168,6 +168,13 @@ class CreateWorkoutCell: UICollectionViewCell {
 
         // For debug to make sure all subviews are within under superview bounds.
         // workoutNameView.superview?.layer.borderWidth = 1
+
+        // Init constraint params.
+        let headerPixelSpace = CreateWorkoutCell.headerPixelSpace
+        let workoutNameFieldHeight = CreateWorkoutCell.workoutNameFieldHeight
+        let workoutDescriptionFieldHeight = CreateWorkoutCell.workoutDescriptionFieldHeight
+        let workoutControlButtonsHeight = CreateWorkoutCell.workoutControlButtonsHeight
+        let workoutControlButtonsWidth = CreateWorkoutCell.workoutControlButtonsWidth
 
         // Put on screen using constraints.
         var verticalContraint = "V:|-\(headerPixelSpace)-[v0(\(workoutNameFieldHeight))]-\(headerPixelSpace)-[v1(\(workoutDescriptionFieldHeight))]-\(headerPixelSpace)-[v2(\(workoutControlButtonsHeight))]"
@@ -228,31 +235,36 @@ class CreateWorkoutCell: UICollectionViewCell {
             print("ERROR: Invalid input for CreateWorkoutCell.workoutControlButtonPressed() !!")
         }
     }
+
+    static func getHeaderHeight() -> CGFloat {
+        let headerHeight = CreateWorkoutCell.workoutNameFieldHeight + CreateWorkoutCell.workoutDescriptionFieldHeight + CreateWorkoutCell.workoutControlButtonsHeight + (CreateWorkoutCell.headerPixelSpace * (CreateWorkoutCell.headerSubViewCount + 1))
+        return headerHeight
+    }
 }
 
 class CreateWorkoutStickyHeadersLayout: UICollectionViewFlowLayout {
 
-    //Whenever the bounds of the collection view change,
-    //we need to invalidate the layout of the collection view.
+    // Whenever the bounds of the collection view change,
+    // we need to invalidate the layout of the collection view.
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
 
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        //Get the layout attributes of the elements in the given rectangle.
+        // Get the layout attributes of the elements in the given rectangle.
         guard let layoutAttributes = super.layoutAttributesForElements(in: rect) else { return nil }
 
-        //Sections for which new layout attributes are stored.
+        // Sections for which new layout attributes are stored.
         let sectionsToAdd = NSMutableIndexSet()
-        //To store the new layout attributes of the elements.
+        // To store the new layout attributes of the elements.
         var newLayoutAttributes = [UICollectionViewLayoutAttributes]()
 
-        //Loop over layoutAttributes and add the layout attributes of the
-        //elements of type .cell to newLayoutAttributes.
-        //For every element of type .cell, we ask it what section it belongs to.
-        //We add the index of the section to sectionsToAdd.
-        //For elements of type .supplementaryView, we ask it for its section
-        //and add that to sectionsToAdd.
+        // Loop over layoutAttributes and add the layout attributes of the
+        // elements of type .cell to newLayoutAttributes.
+        // For every element of type .cell, we ask it what section it belongs to.
+        // We add the index of the section to sectionsToAdd.
+        // For elements of type .supplementaryView, we ask it for its section
+        // and add that to sectionsToAdd.
         for layoutAttributesSet in layoutAttributes {
             if layoutAttributesSet.representedElementCategory == .cell {
                 // Add Layout Attributes
@@ -266,9 +278,9 @@ class CreateWorkoutStickyHeadersLayout: UICollectionViewFlowLayout {
             }
         }
 
-        //For every index of sectionsToAdd, we create an index path
-        //and ask the flow layout for the layout attributes of the
-        //corresponding supplementary view.
+        // For every index of sectionsToAdd, we create an index path
+        // and ask the flow layout for the layout attributes of the
+        // corresponding supplementary view.
         for section in sectionsToAdd {
             let indexPath = IndexPath(item: 0, section: section)
             if let sectionAttributes = self.layoutAttributesForSupplementaryView(ofKind: UICollectionElementKindSectionHeader, at: indexPath) {
@@ -283,18 +295,17 @@ class CreateWorkoutStickyHeadersLayout: UICollectionViewFlowLayout {
         guard let layoutAttributes = super.layoutAttributesForSupplementaryView(ofKind: elementKind, at: indexPath) else { return nil }
         guard let collectionView = collectionView else { return layoutAttributes }
 
-        //Stores the vertical content offset of the collection view.
+        // Stores the vertical content offset of the collection view.
         let contentOffsetY = collectionView.contentOffset.y
-        //Stores the frame of the supplementary view.
+        // Stores the frame of the supplementary view.
         var frameForSupplementaryView = layoutAttributes.frame
 
         let topBarHeight = UIApplication.shared.statusBarFrame.size.height +
             ((UIApplication.topViewController())?.navigationController?.navigationBar.frame.height ?? 0.0)
 
-        //Find amount of header to hide. All except control buttons.
-        //Also adjust for navigation and status bar.
-        let tempObject = CreateWorkoutCell()    //FIXME: Use static.
-        let hideHeaderHeight = tempObject.workoutNameFieldHeight + tempObject.workoutDescriptionFieldHeight + (tempObject.headerPixelSpace * 2)
+        // Find amount of header to hide. All except control buttons.
+        // Also adjust for navigation and status bar.
+        let hideHeaderHeight = CreateWorkoutCell.getHeaderHeight() - (CreateWorkoutCell.workoutControlButtonsHeight + (CreateWorkoutCell.headerPixelSpace * (CreateWorkoutCell.headerSubViewCount - 1)))
 
         //Calculate when contentOffsetY will cross header height (which will be hidden).
         let contentOffsetYLimit = hideHeaderHeight - topBarHeight

@@ -51,8 +51,7 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
         // Specify header size.
         if (section == 0) {
             // First header has workoutName/workoutDescription text field.
-            let tempObject = CreateWorkoutCell()
-            let headerHeight = tempObject.workoutNameFieldHeight + tempObject.workoutDescriptionFieldHeight + tempObject.workoutControlButtonsHeight + (tempObject.headerPixelSpace * (tempObject.headerSubViewCount + 1))
+            let headerHeight = CreateWorkoutCell.getHeaderHeight()
             return CGSize(width: view.frame.width, height: headerHeight)
         }
         else {
@@ -63,10 +62,8 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         // Spacing between different sections.
         if (section == 0) {
-            //FIXME: Change these parameters to static.
             //FIXME: Should have top inset here?
-            let tempObject = CreateWorkoutCell()
-            return UIEdgeInsetsMake(0, 0, tempObject.headerPixelSpace, 0)
+            return UIEdgeInsetsMake(0, 0, CreateWorkoutCell.headerPixelSpace, 0)
         }
         else {
             return UIEdgeInsetsMake(25, 0, 0, 0)
