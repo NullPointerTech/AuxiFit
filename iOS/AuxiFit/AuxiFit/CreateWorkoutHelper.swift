@@ -248,6 +248,23 @@ class CreateWorkoutCell: UICollectionViewCell {
                 vc.collectionView?.reloadData()
             }, completion: nil)
             vc.collectionView?.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+
+            // let cellAttr = vc.collectionView?.layoutAttributesForItem(at: indexPath)
+            // print("minY: ", (cellAttr?.frame.minY)!, "maxY: ", (cellAttr?.frame.maxY)!)
+
+            /*
+            // Check if new cell is already visible.
+            let cellRect = CGRect(x: (cellAttr?.frame.minX)!, y: (cellAttr?.frame.minY)!, width: (cellAttr?.frame.width)!, height: (cellAttr?.frame.height)!)
+            if (vc.collectionView?.bounds.contains(cellRect))! {
+                print("Visible: ", indexPath)
+            }
+            else {
+                // New cell is not completely visible. Scroll approproately.
+                let delta = (cellAttr?.frame.maxY)! - (vc.collectionView?.frame.maxY)! + CreateWorkoutCell.headerPixelSpace
+                vc.collectionView?.setContentOffset(CGPoint(x: 0, y: delta), animated: false)
+            }
+            */
+
         default:
             print("ERROR: Invalid input for CreateWorkoutCell.workoutControlButtonPressed() !!")
         }
@@ -288,7 +305,6 @@ class CreateWorkoutStickyHeadersLayout: UICollectionViewFlowLayout {
                 newLayoutAttributes.append(layoutAttributesSet)
                 // Update Sections to Add
                 sectionsToAdd.add(layoutAttributesSet.indexPath.section)
-
             } else if layoutAttributesSet.representedElementCategory == .supplementaryView {
                 // Update Sections to Add
                 sectionsToAdd.add(layoutAttributesSet.indexPath.section)
@@ -304,7 +320,6 @@ class CreateWorkoutStickyHeadersLayout: UICollectionViewFlowLayout {
                 newLayoutAttributes.append(sectionAttributes)
             }
         }
-
         return newLayoutAttributes
     }
 
@@ -317,19 +332,16 @@ class CreateWorkoutStickyHeadersLayout: UICollectionViewFlowLayout {
         // Stores the frame of the supplementary view.
         var frameForSupplementaryView = layoutAttributes.frame
 
-        let topBarHeight = UIApplication.shared.statusBarFrame.size.height +
-            ((UIApplication.topViewController())?.navigationController?.navigationBar.frame.height ?? 0.0)
-
         // Find amount of header to hide. All except control buttons.
         // Also adjust for navigation and status bar.
         let hideHeaderHeight = CreateWorkoutCell.getHeaderHeight() - (CreateWorkoutCell.workoutControlButtonsHeight + (CreateWorkoutCell.headerPixelSpace * (CreateWorkoutCell.headerSubViewCount - 1)))
 
         //Calculate when contentOffsetY will cross header height (which will be hidden).
-        let contentOffsetYLimit = hideHeaderHeight - topBarHeight
+        let contentOffsetYLimit = hideHeaderHeight
 
         //Set position of header based on contentOffsetY.
         if contentOffsetY > contentOffsetYLimit {
-            frameForSupplementaryView.origin.y = contentOffsetY + topBarHeight - hideHeaderHeight
+            frameForSupplementaryView.origin.y = contentOffsetY - hideHeaderHeight
         }
         else {
             frameForSupplementaryView.origin.y = 0

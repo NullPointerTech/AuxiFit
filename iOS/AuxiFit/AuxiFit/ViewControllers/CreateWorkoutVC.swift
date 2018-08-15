@@ -28,6 +28,11 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
         // Register cell classes
         self.collectionView!.register(CreateWorkoutCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView?.register(CreateWorkoutCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: workoutNameHeader)
+
+        // This is to avoid hiding cells behind tab bar.
+        self.edgesForExtendedLayout = []
+        self.extendedLayoutIncludesOpaqueBars = false
+        self.automaticallyAdjustsScrollViewInsets = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +67,9 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         // Spacing between different sections.
         if (section == 0) {
+            // Need bottom inset here to add some gap between last cell and tab bar.
+            // FIXME: If we set bottom inset, scrolling does not work properly.
+            //return UIEdgeInsetsMake(0, 0, CreateWorkoutCell.headerPixelSpace, 0)
             return UIEdgeInsetsMake(0, 0, 0, 0)
         }
         else {
