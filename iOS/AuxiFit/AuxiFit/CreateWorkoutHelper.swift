@@ -40,6 +40,8 @@ class CreateWorkoutCell: UICollectionViewCell {
     static var currentSelectedCell: IndexPath? = nil
     // to track if given cell is selected or not.
     var cellSelected = false
+    // to track the cell object index. Used in prepareForReuse.
+    var cellIndexPath: IndexPath? = nil
 
     // Setup cell parameters.
     var createWorkoutCellItem: CreateWorkoutCellItem? {
@@ -212,6 +214,15 @@ class CreateWorkoutCell: UICollectionViewCell {
     }
 
     private func setupCellView() {
+        // Override default createWorkoutCellInfoLabel config based
+        // on cell selection status, since we reuse cells.
+        if CreateWorkoutCell.currentSelectedCell == self.cellIndexPath {
+            self.setupCellSelected()
+        }
+        else {
+            self.setupCellDeselected()
+        }
+
         // Add to subview hierarchy.
         addSubview(createWorkoutCellInfoLabel)
 
@@ -277,6 +288,21 @@ class CreateWorkoutCell: UICollectionViewCell {
     static func getHeaderHeight() -> CGFloat {
         let headerHeight = CreateWorkoutCell.workoutNameFieldHeight + CreateWorkoutCell.workoutDescriptionFieldHeight + CreateWorkoutCell.workoutControlButtonsHeight + (CreateWorkoutCell.headerPixelSpace * (CreateWorkoutCell.headerSubViewCount + 1))
         return headerHeight
+    }
+
+    func setupCellSelected() {
+        self.createWorkoutCellInfoLabel.backgroundColor = UIColor.darkGray
+        self.createWorkoutCellInfoLabel.textColor = UIColor.white
+        self.cellSelected = true
+    }
+
+    func setupCellDeselected() {
+        self.createWorkoutCellInfoLabel.backgroundColor = UIColor.white
+        self.createWorkoutCellInfoLabel.textColor = UIColor.black
+        let labelAttrText = self.createWorkoutCellInfoLabel.attributedText as? NSMutableAttributedString
+        // FIXME: Need to remove hard-coding of 38 here.
+        labelAttrText?.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: NSMakeRange((self.createWorkoutCellItem?.title.count)!, 38))
+        self.cellSelected = false
     }
 }
 

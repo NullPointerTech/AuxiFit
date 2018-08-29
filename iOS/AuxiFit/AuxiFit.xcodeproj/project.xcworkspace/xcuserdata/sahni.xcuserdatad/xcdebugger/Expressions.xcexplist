@@ -3,7 +3,12 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "CreateWorkoutStickyHeadersLayout.boundaries(forSection:):CreateWorkoutHelper.swift">
+         contextName = "CreateWorkoutVC.collectionView(_:didHighlightItemAt:):CreateWorkoutVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "CreateWorkoutCell.currentSelectedCell">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "CreateWorkoutStickyHeadersLayout.layoutAttributesForSupplementaryView(ofKind:at:):CreateWorkoutHelper.swift">
@@ -17,6 +22,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "CreateWorkoutStickyHeadersLayout.boundaries(forSection:):CreateWorkoutHelper.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CreateWorkoutCell.workoutControlButtonsBG.getter:CreateWorkoutHelper.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CreateWorkoutVC.collectionView(_:cellForItemAt:):CreateWorkoutVC.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CreateWorkoutCell.prepareForReuse():CreateWorkoutHelper.swift">
+      </ContextState>
+      <ContextState
          contextName = "CreateWorkoutCell.workoutControlButtonPressed(sender:):CreateWorkoutHelper.swift">
          <PersistentStrings>
             <PersistentString
@@ -25,10 +42,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "CreateWorkoutCell.workoutControlButtonsBG.getter:CreateWorkoutHelper.swift">
-      </ContextState>
-      <ContextState
-         contextName = "CreateWorkoutVC.collectionView(_:didHighlightItemAt:):CreateWorkoutVC.swift">
+         contextName = "CreateWorkoutCell.setupCellView():CreateWorkoutHelper.swift">
          <PersistentStrings>
             <PersistentString
                value = "CreateWorkoutCell.currentSelectedCell">

@@ -94,6 +94,7 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
         let createWorkoutCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CreateWorkoutCell
         // Setup workout cell attributes.
         createWorkoutCell.createWorkoutCellItem = createWorkoutCellList[indexPath.item]
+        createWorkoutCell.cellIndexPath = indexPath
         createWorkoutCell.setupCell(cellType: "Cell")
         return createWorkoutCell
     }
@@ -119,52 +120,40 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
         return true
     }
 
-    override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! CreateWorkoutCell
         var currSelCellEqNewCell = false
 
         // Deselect current selected cell (if any selected).
         if CreateWorkoutCell.currentSelectedCell != nil {
-            let currSelectedCell = collectionView.cellForItem(at: CreateWorkoutCell.currentSelectedCell!) as! CreateWorkoutCell
+            // Protection: only manipulate cell params if it is visible, else cell object can be nil.
+            if (collectionView.indexPathsForVisibleItems).contains(CreateWorkoutCell.currentSelectedCell!) {
+                let currSelectedCell = collectionView.cellForItem(at: CreateWorkoutCell.currentSelectedCell!) as! CreateWorkoutCell
 
-            if currSelectedCell.cellSelected {
-                currSelectedCell.createWorkoutCellInfoLabel.backgroundColor = UIColor.white
-                currSelectedCell.createWorkoutCellInfoLabel.textColor = UIColor.black
-                let labelAttrText = currSelectedCell.createWorkoutCellInfoLabel.attributedText as? NSMutableAttributedString
-                //FIXME: Need to remove hard-coding of 38 here.
-                labelAttrText?.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: NSMakeRange((cell.createWorkoutCellItem?.title.count)!, 38))
-                currSelectedCell.cellSelected = false
-                CreateWorkoutCell.currentSelectedCell = nil
-            }
+                if currSelectedCell.cellSelected {
+                    // Deselect cell.
+                    currSelectedCell.setupCellDeselected()
+                    CreateWorkoutCell.currentSelectedCell = nil
+                }
 
-            // Check if new cell and curr selected cell are same.
-            if currSelectedCell == cell {
-                currSelCellEqNewCell = true
+                // Check if new cell and curr selected cell are same.
+                if currSelectedCell == cell {
+                    currSelCellEqNewCell = true
+                }
             }
         }
 
         // If currSelectedCell and new selected cell are same, skip.
         if !currSelCellEqNewCell {
             if cell.cellSelected {
-                cell.createWorkoutCellInfoLabel.backgroundColor = UIColor.white
-                cell.createWorkoutCellInfoLabel.textColor = UIColor.black
-                let labelAttrText = cell.createWorkoutCellInfoLabel.attributedText as? NSMutableAttributedString
-                //FIXME: Need to remove hard-coding of 38 here.
-                labelAttrText?.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: NSMakeRange((cell.createWorkoutCellItem?.title.count)!, 38))
-                cell.cellSelected = false
+                // Deselect cell. FIXME: Is this code ever executed? Should be handled in above deselect code.
+                cell.setupCellDeselected()
             }
             else {
-                cell.createWorkoutCellInfoLabel.backgroundColor = UIColor.darkGray
-                cell.createWorkoutCellInfoLabel.textColor = UIColor.white
-                cell.cellSelected = true
+                cell.setupCellSelected()
                 CreateWorkoutCell.currentSelectedCell = indexPath
             }
         }
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        //let cell = collectionView.cellForItem(at: indexPath)
-        //cell?.backgroundColor = UIColor.white
     }
 
     /*
