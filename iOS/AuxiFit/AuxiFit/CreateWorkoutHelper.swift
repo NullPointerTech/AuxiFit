@@ -8,16 +8,28 @@
 
 import UIKit
 
+enum CreateWorkoutCellItemType: String {
+    case Workout
+    case Superset
+    case Exercise
+
+    func cellType() -> String {
+        return self.rawValue
+    }
+}
+
 class CreateWorkoutCellItem {
     var title: String
     var type: String
     var details: String
+    var cellType: CreateWorkoutCellItemType
 
-    init(title: String, type: String, details: String)
+    init(title: String, type: String, details: String, cellType: CreateWorkoutCellItemType)
     {
         self.title = title
         self.type = type
         self.details = details
+        self.cellType = cellType
     }
 }
 
@@ -250,20 +262,22 @@ class CreateWorkoutCell: UICollectionViewCell {
 
         switch buttonTitle {
         case "+Day":
-            // Create a new cell item.
+            // Create a new cell item of workout type.
             let cellTitle = "Workout Day 1"
             let cellType = "Type: Workout"
             let cellDetails = "0 Set(s), 4 Exercise(s)"
-            let cellItem = CreateWorkoutCellItem(title: cellTitle, type: cellType, details: cellDetails)
+            let cellItem = CreateWorkoutCellItem(title: cellTitle, type: cellType, details: cellDetails, cellType: CreateWorkoutCellItemType.Workout)
             let vc = UIApplication.topViewController() as! CreateWorkoutVC
             vc.createWorkoutCellList.append(cellItem)
-            let indexPath = IndexPath(item: (vc.createWorkoutCellList.count-1), section: 0)
+            let indexPath = IndexPath(row: (vc.createWorkoutCellList.count-1), section: 0)
             vc.collectionView?.performBatchUpdates({
                 vc.collectionView?.insertItems(at: [indexPath])
                 vc.collectionView?.reloadData()
             }, completion: nil)
             vc.collectionView?.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
 
+            // FIXME: Below is just placeholder code for debugging issue where
+            // auto-scroll on cell addition does not account for bottom inset.
             // let cellAttr = vc.collectionView?.layoutAttributesForItem(at: indexPath)
             // print("minY: ", (cellAttr?.frame.minY)!, "maxY: ", (cellAttr?.frame.maxY)!)
 
@@ -279,6 +293,80 @@ class CreateWorkoutCell: UICollectionViewCell {
                 vc.collectionView?.setContentOffset(CGPoint(x: 0, y: delta), animated: false)
             }
             */
+            break
+
+        case "+Set":
+            // +Set is only valid if a workout day is selected.
+            let curSelCellIndex = (CreateWorkoutCell.currentSelectedCell)
+            if curSelCellIndex != nil {
+                let vc = UIApplication.topViewController() as! CreateWorkoutVC
+                // Only add superset cell if selected workout cell is visible.
+                if((vc.collectionView?.indexPathsForVisibleItems)?.contains(curSelCellIndex!))! {
+                    // Only add superset cell if selected cell type is Workout cell.
+                    let selCell = vc.collectionView?.cellForItem(at: curSelCellIndex!) as! CreateWorkoutCell
+                    let selCellType = selCell.createWorkoutCellItem?.cellType
+                    if selCellType == CreateWorkoutCellItemType.Workout {
+                        // Create a new cell item of superset type.
+                        let cellTitle = "Set 1"
+                        let cellType = "Type: Superset"
+                        let cellDetails = "0 Exercise(s)"
+                        let cellItem = CreateWorkoutCellItem(title: cellTitle, type: cellType, details: cellDetails, cellType: CreateWorkoutCellItemType.Superset)
+                        let indexPath = IndexPath(row: ((CreateWorkoutCell.currentSelectedCell?.row)!+1), section: 0)
+                        vc.createWorkoutCellList.insert(cellItem, at: indexPath.row)
+                        vc.collectionView?.performBatchUpdates({
+                            vc.collectionView?.insertItems(at: [indexPath])
+                            vc.collectionView?.reloadData()
+                        }, completion: nil)
+                        vc.collectionView?.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+                    }
+                }
+            }
+            break
+
+        case "+Exercise":
+            // FIXME: Exercise cell should be created based on exercise chosen from database.
+            let curSelCellIndex = (CreateWorkoutCell.currentSelectedCell)
+            let vc = UIApplication.topViewController() as! CreateWorkoutVC
+            var indexPath = IndexPath(row: 0, section: 0)   //Init to zero, will be overwritten.
+            var newCellCreated = false
+            if curSelCellIndex != nil {
+                // Add new exercise after selected cell.
+                // Only add exercise cell if selected Workout/Superset cell is visible.
+                if((vc.collectionView?.indexPathsForVisibleItems)?.contains(curSelCellIndex!))! {
+                    // Only add superset cell if selected cell type is Workout/Superset cell.
+                    let selCell = vc.collectionView?.cellForItem(at: curSelCellIndex!) as! CreateWorkoutCell
+                    let selCellType = selCell.createWorkoutCellItem?.cellType
+                    if selCellType == CreateWorkoutCellItemType.Workout || selCellType == CreateWorkoutCellItemType.Superset {
+                        // Create a new cell item of exercise type.
+                        let cellTitle = "Barbell Bench Press"
+                        let cellType = "Type: Exercise"
+                        let cellDetails = "Category: Pectorals"
+                        let cellItem = CreateWorkoutCellItem(title: cellTitle, type: cellType, details: cellDetails, cellType: CreateWorkoutCellItemType.Exercise)
+                        indexPath = IndexPath(row: ((CreateWorkoutCell.currentSelectedCell?.row)!+1), section: 0)
+                        vc.createWorkoutCellList.insert(cellItem, at: indexPath.row)
+                        newCellCreated = true
+                    }
+                }
+            }
+            else {
+                // Add new exercise towards end of collection view.
+                let cellTitle = "Barbell Bench Press"
+                let cellType = "Type: Exercise"
+                let cellDetails = "Category: Pectorals"
+                let cellItem = CreateWorkoutCellItem(title: cellTitle, type: cellType, details: cellDetails, cellType: CreateWorkoutCellItemType.Exercise)
+                let vc = UIApplication.topViewController() as! CreateWorkoutVC
+                vc.createWorkoutCellList.append(cellItem)
+                indexPath = IndexPath(row: (vc.createWorkoutCellList.count-1), section: 0)
+                newCellCreated = true
+            }
+            if newCellCreated == true {
+                vc.collectionView?.performBatchUpdates({
+                    vc.collectionView?.insertItems(at: [indexPath])
+                    vc.collectionView?.reloadData()
+                }, completion: nil)
+                vc.collectionView?.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+            }
+            break
 
         default:
             print("ERROR: Invalid input for CreateWorkoutCell.workoutControlButtonPressed() !!")
@@ -300,8 +388,9 @@ class CreateWorkoutCell: UICollectionViewCell {
         self.createWorkoutCellInfoLabel.backgroundColor = UIColor.white
         self.createWorkoutCellInfoLabel.textColor = UIColor.black
         let labelAttrText = self.createWorkoutCellInfoLabel.attributedText as? NSMutableAttributedString
-        // FIXME: Need to remove hard-coding of 38 here.
-        labelAttrText?.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: NSMakeRange((self.createWorkoutCellItem?.title.count)!, 38))
+        let tintRangeStart = (self.createWorkoutCellItem?.title.count)! + 1     // +1 for newline.
+        let tintRangeLen = (self.createWorkoutCellItem?.type.count)! + (self.createWorkoutCellItem?.details.count)! + 1     // +1 for newline.
+        labelAttrText?.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: NSMakeRange(tintRangeStart, tintRangeLen))
         self.cellSelected = false
     }
 }

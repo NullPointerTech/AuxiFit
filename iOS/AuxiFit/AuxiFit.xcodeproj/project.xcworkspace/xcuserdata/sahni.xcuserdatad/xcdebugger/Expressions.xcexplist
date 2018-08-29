@@ -3,6 +3,17 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "CreateWorkoutVC.collectionView(_:layout:sizeForItemAt:):CreateWorkoutVC.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CreateWorkoutCell.setupCellDeselected():CreateWorkoutHelper.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.createWorkoutCellItem?.title.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "CreateWorkoutVC.collectionView(_:didHighlightItemAt:):CreateWorkoutVC.swift">
          <PersistentStrings>
             <PersistentString
@@ -36,6 +47,9 @@
       <ContextState
          contextName = "CreateWorkoutCell.workoutControlButtonPressed(sender:):CreateWorkoutHelper.swift">
          <PersistentStrings>
+            <PersistentString
+               value = "vc.createWorkoutCellList.count">
+            </PersistentString>
             <PersistentString
                value = "self.window?.rootViewController?.presentedViewController">
             </PersistentString>
