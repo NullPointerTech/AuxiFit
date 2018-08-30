@@ -1,24 +1,23 @@
 //
-//  WorkoutsVC.swift
+//  ExercisesVC.swift
 //  AuxiFit
 //
-//  Created by Anjandeep Sahni on 10/07/18.
+//  Created by Anjandeep Sahni on 30/08/18.
 //  Copyright © 2018 Null Pointer Tech. All rights reserved.
 //
 
 import UIKit
-import CoreData
 
-private let reuseIdentifier = "workoutCell"
+private let reuseIdentifier = "exerciseCell"
 
-class WorkoutsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    // List of workouts to display.
-    var workoutsList = [WorkoutCellItem]()
+class ExercisesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    // List of exercises to display.
+    var exercisesList = [String]()
 
     override init(collectionViewLayout layout: UICollectionViewLayout) {
         super.init(collectionViewLayout: layout)
         //Setup tab title here so that other VC's can fetch.
-        self.title = "Workouts"
+        self.title = "Exercises"
     }
 
     // This is required by compiler.
@@ -38,22 +37,15 @@ class WorkoutsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Setup workouts data.
-        setupData()
-
         // Register cell classes
-        self.collectionView!.register(WorkoutCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         // Set navigation bar title.
         navigationItem.title = self.title!
-
-        // Set navigation bar right button.
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(sequeToCreateWorkout))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
 
         // To highlight selected cell.
         self.collectionView?.delaysContentTouches = false
@@ -89,22 +81,24 @@ class WorkoutsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return workoutsList.count
+        return 4//exercisesList.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let workoutCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! WorkoutCell
-        // Setup workout cell attributes.
-        workoutCell.workoutCellItem = workoutsList[indexPath.item]
-        return workoutCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+    
+        // Configure the cell
+        cell.backgroundColor = UIColor.white
+    
+        return cell
     }
 
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-    return true
+        return true
     }
 
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-    return true
+        return true
     }
 
     override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
@@ -118,18 +112,18 @@ class WorkoutsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout
     }
 
     /*
-     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-     return false
-     }
+    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
+    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
 
-     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-     return false
-     }
+    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        return false
+    }
 
-     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-
-     }
-     */
+    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+    
+    }
+    */
 
 }

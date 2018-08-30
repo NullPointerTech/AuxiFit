@@ -31,7 +31,7 @@ class MainTabBarVC: UITabBarController, UITabBarControllerDelegate {
         tabTwoNC.title = tabTwo.title
         
         // Create Tab Three and its navigation controller.
-        let tabThree = TabThreeVC()
+        let tabThree = ExercisesVC(collectionViewLayout: UICollectionViewFlowLayout())
         let tabThreeNC = UINavigationController(rootViewController: tabThree)
         tabThreeNC.title = tabThree.title
         

@@ -27,6 +27,7 @@ class TabFourVC: UIViewController {
 
         // Setup view controller color.
         self.view.backgroundColor = UIColor(white: 0.75, alpha: 1)
+        self.navigationController?.navigationBar.isTranslucent = false
     }
 
     override func viewWillAppear(_ animated: Bool) {

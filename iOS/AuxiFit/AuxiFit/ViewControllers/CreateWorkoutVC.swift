@@ -21,7 +21,8 @@ class CreateWorkoutVC: UICollectionViewController, UICollectionViewDelegateFlowL
         // Setup view controller color, bounce.
         self.collectionView?.backgroundColor = UIColor(white: 0.90, alpha: 1)
         self.collectionView?.alwaysBounceVertical = true
-
+        self.navigationController?.navigationBar.isTranslucent = false
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
