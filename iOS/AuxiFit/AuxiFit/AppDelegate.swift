@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,7 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainTabBarController = MainTabBarVC()
         mainTabBarController.tabBar.isTranslucent = false
         window?.rootViewController = mainTabBarController
-        
+
+        // Configure firebase.
+        FirebaseApp.configure()
         return true
     }
 

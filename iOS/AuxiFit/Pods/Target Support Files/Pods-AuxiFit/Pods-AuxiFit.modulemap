@@ -1,0 +1,6 @@
+framework module Pods_AuxiFit {
+  umbrella header "Pods-AuxiFit-umbrella.h"
+
+  export *
+  module * { export * }
+}
