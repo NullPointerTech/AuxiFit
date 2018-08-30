@@ -19,6 +19,7 @@
 		0893245520F530A20068789E /* TabFiveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0893245420F530A20068789E /* TabFiveVC.swift */; };
 		089887712137F20E005A3268 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 089887702137F20D005A3268 /* GoogleService-Info.plist */; };
 		0898877321382C09005A3268 /* ExercisesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898877221382C09005A3268 /* ExercisesVC.swift */; };
+		0898877521385973005A3268 /* ExercisesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898877421385973005A3268 /* ExercisesHelper.swift */; };
 		08B58A6420FFAB89000BB4AE /* CreateWorkoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B58A6320FFAB89000BB4AE /* CreateWorkoutVC.swift */; };
 		08B58A6620FFB949000BB4AE /* CreateWorkoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B58A6520FFB949000BB4AE /* CreateWorkoutHelper.swift */; };
 		08B58A6820FFBE79000BB4AE /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B58A6720FFBE79000BB4AE /* CommonExtensions.swift */; };
@@ -66,6 +67,7 @@
 		0893245420F530A20068789E /* TabFiveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabFiveVC.swift; path = AuxiFit/ViewControllers/TabFiveVC.swift; sourceTree = "<group>"; };
 		089887702137F20D005A3268 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0898877221382C09005A3268 /* ExercisesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExercisesVC.swift; path = AuxiFit/ViewControllers/ExercisesVC.swift; sourceTree = "<group>"; };
+		0898877421385973005A3268 /* ExercisesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesHelper.swift; sourceTree = "<group>"; };
 		08B58A6320FFAB89000BB4AE /* CreateWorkoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateWorkoutVC.swift; path = AuxiFit/ViewControllers/CreateWorkoutVC.swift; sourceTree = "<group>"; };
 		08B58A6520FFB949000BB4AE /* CreateWorkoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkoutHelper.swift; sourceTree = "<group>"; };
 		08B58A6720FFBE79000BB4AE /* CommonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExtensions.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				0893241A20F5255E0068789E /* AppDelegate.swift */,
 				08B58A6720FFBE79000BB4AE /* CommonExtensions.swift */,
 				08B58A6520FFB949000BB4AE /* CreateWorkoutHelper.swift */,
+				0898877421385973005A3268 /* ExercisesHelper.swift */,
 				08D0813F20FA8BFC00B43A8F /* WorkoutsVCHelper.swift */,
 				0893242120F5255E0068789E /* Assets.xcassets */,
 				08B58A6220FA9EE2000BB4AE /* CoreDataModels */,
@@ -391,11 +394,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-AuxiFit/Pods-AuxiFit-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,6 +439,7 @@
 				0893244920F52C970068789E /* MainTabBarVC.swift in Sources */,
 				0893241B20F5255E0068789E /* AppDelegate.swift in Sources */,
 				08B58A6620FFB949000BB4AE /* CreateWorkoutHelper.swift in Sources */,
+				0898877521385973005A3268 /* ExercisesHelper.swift in Sources */,
 				0893244D20F52FDC0068789E /* WorkoutsVC.swift in Sources */,
 				0893245520F530A20068789E /* TabFiveVC.swift in Sources */,
 				0898877321382C09005A3268 /* ExercisesVC.swift in Sources */,

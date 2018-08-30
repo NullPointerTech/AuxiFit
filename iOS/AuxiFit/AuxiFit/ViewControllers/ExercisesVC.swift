@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 private let reuseIdentifier = "exerciseCell"
 
 class ExercisesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     // List of exercises to display.
     var exercisesList = [String]()
+    var refExercises: DatabaseReference?
+    var exerciseDbHandle: DatabaseHandle?
 
     override init(collectionViewLayout layout: UICollectionViewLayout) {
         super.init(collectionViewLayout: layout)
@@ -38,7 +41,33 @@ class ExercisesVC: UICollectionViewController, UICollectionViewDelegateFlowLayou
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(ExerciseCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+
+        // Set the firebase database reference.
+        refExercises = Database.database().reference()
+        var indexPaths = [IndexPath]()
+        // Retreive the exercise database and listen for changes.
+        exerciseDbHandle = refExercises?.child("Exercises").observe(.value, with: { (snapshot) in
+            // Code to execute when the exercise database is changed.
+            // Take value from the snapshot and add it to the exercisesList.
+            for child in snapshot.children{
+                for grandchild in (child as! DataSnapshot).children{
+                    let valueD = grandchild as! DataSnapshot
+                    let keyD = valueD.key
+                    let value1 = valueD.value
+                    if keyD == "N" {
+                        if let exerName = value1 as? String {
+                            self.exercisesList.append(exerName)
+                            indexPaths.append(IndexPath(row: self.exercisesList.index(of: exerName)!, section: 0))
+                        }
+                    }
+                }
+            }
+            self.collectionView?.performBatchUpdates({
+                self.collectionView?.insertItems(at: indexPaths)
+                self.collectionView?.reloadData()
+            }, completion: nil)
+        })
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -81,16 +110,14 @@ class ExercisesVC: UICollectionViewController, UICollectionViewDelegateFlowLayou
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4//exercisesList.count
+        return exercisesList.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-        cell.backgroundColor = UIColor.white
-    
-        return cell
+        let exerciseCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ExerciseCell
+        // Setup exercise cell attributes.
+        exerciseCell.exerciseCellItem = exercisesList[indexPath.item]
+        return exerciseCell
     }
 
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {

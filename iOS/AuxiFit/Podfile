@@ -7,6 +7,7 @@ target 'AuxiFit' do
 
   # Pods for AuxiFit
   pod 'Firebase/Core'
+  pod 'Firebase/Database'
 
   target 'AuxiFitTests' do
     inherit! :search_paths

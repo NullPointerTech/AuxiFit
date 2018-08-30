@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxiFit/ViewControllers/ExercisesVC.swift"
+            timestampString = "557342728.515566"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AuxiFit.ExercisesVC.viewDidLoad() -&gt; ()"
+                  moduleName = "AuxiFit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sahni/Documents/Code/github_repos/null_pointer_tech/AuxiFit/iOS/AuxiFit/AuxiFit/ViewControllers/ExercisesVC.swift"
+                  timestampString = "557341943.545033"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "1348">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__ObjC.DataSnapshot) -&gt; () in AuxiFit.ExercisesVC.viewDidLoad() -&gt; ()"
+                  moduleName = "AuxiFit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sahni/Documents/Code/github_repos/null_pointer_tech/AuxiFit/iOS/AuxiFit/AuxiFit/ViewControllers/ExercisesVC.swift"
+                  timestampString = "557341943.547343"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "27">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
