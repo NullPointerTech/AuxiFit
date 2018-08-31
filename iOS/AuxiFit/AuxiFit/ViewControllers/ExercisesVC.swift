@@ -46,22 +46,15 @@ class ExercisesVC: UICollectionViewController, UICollectionViewDelegateFlowLayou
         // Set the firebase database reference.
         refExercises = Database.database().reference()
         var indexPaths = [IndexPath]()
+
         // Retreive the exercise database and listen for changes.
         exerciseDbHandle = refExercises?.child("Exercises").observe(.value, with: { (snapshot) in
             // Code to execute when the exercise database is changed.
             // Take value from the snapshot and add it to the exercisesList.
             for child in snapshot.children{
-                for grandchild in (child as! DataSnapshot).children{
-                    let valueD = grandchild as! DataSnapshot
-                    let keyD = valueD.key
-                    let value1 = valueD.value
-                    if keyD == "N" {
-                        if let exerName = value1 as? String {
-                            self.exercisesList.append(exerName)
-                            indexPaths.append(IndexPath(row: self.exercisesList.index(of: exerName)!, section: 0))
-                        }
-                    }
-                }
+                let exerciseEntry = child as! DataSnapshot
+                self.exercisesList.append(exerciseEntry.value as! String)
+                indexPaths.append(IndexPath(row: self.exercisesList.index(of: exerciseEntry.value as! String)!, section: 0))
             }
             self.collectionView?.performBatchUpdates({
                 self.collectionView?.insertItems(at: indexPaths)
@@ -87,7 +80,7 @@ class ExercisesVC: UICollectionViewController, UICollectionViewDelegateFlowLayou
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // Specify cell size.
-        return CGSize(width: view.frame.width, height: 75)
+        return CGSize(width: view.frame.width, height: 40)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
